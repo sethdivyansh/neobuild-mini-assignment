@@ -11,12 +11,16 @@ export const verifyToken = async (
   console.log(token);
 
   if (!token) {
-    return res.status(401).send({ error: "Token missing" });
+    res.status(401).send({ error: "Token missing" });
+    return;
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET_KEY!);
-    console.log(decoded);
+    const username = jwt.verify(token, JWT_SECRET_KEY!);
+    if (!username) {
+      res.status(401).send({ error: "Token invalid" });
+      return;
+    }
     next();
   } catch (error) {
     res.status(401).send({ error: "Invalid token" });
