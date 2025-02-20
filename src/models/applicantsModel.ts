@@ -31,7 +31,6 @@ const applicantsSchema = new mongoose.Schema(
     email: [
       {
         type: String,
-
         lowercase: true,
       },
     ],
