@@ -28,6 +28,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.4",
+    "pdf-text-reader": "^5.1.0",
     "tsc-watch": "^6.2.1"
   }
 }

@@ -23,55 +23,60 @@ interface Applicant extends mongoose.Document {
   summary: string;
 }
 
-const applicantsSchema = new mongoose.Schema({
-  name: {
-    type: String,
+const applicantsSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+    },
+    education: {
+      degree: {
+        type: String,
+      },
+      branch: {
+        type: String,
+      },
+      institution: {
+        type: String,
+      },
+      year: {
+        type: Number,
+        required: true,
+        min: 1900,
+        max: new Date().getFullYear(),
+      },
+    },
+    experience: {
+      job_title: {
+        type: String,
+      },
+      company: {
+        type: String,
+      },
+      start_date: {
+        type: Date,
+      },
+      end_date: {
+        type: Date,
+      },
+    },
+    skills: [
+      {
+        type: String,
+      },
+    ],
+    summary: {
+      type: String,
+    },
   },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-  },
-  education: {
-    degree: {
-      type: String,
-    },
-    branch: {
-      type: String,
-    },
-    institution: {
-      type: String,
-    },
-    year: {
-      type: Number,
-      required: true,
-      min: 1900,
-      max: new Date().getFullYear(),
-    },
-  },
-  experience: {
-    job_title: {
-      type: String,
-    },
-    company: {
-      type: String,
-    },
-    start_date: {
-      type: Date,
-    },
-    end_date: {
-      type: Date,
-    },
-  },
-  skills: [
-    {
-      type: String,
-    },
-  ],
-  summary: {
-    type: String,
-  },
-});
+  {
+    collection: "applicant", // Set collection name to "applicant" to prevent Mongoose pluralization.
+  }
+);
 
 export const Applicants: mongoose.Model<Applicant> = mongoose.model<Applicant>(
   "Applicants",
