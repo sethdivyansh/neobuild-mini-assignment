@@ -74,7 +74,6 @@ export const processAndStoreApplicantData = async (
 
     try {
       const applicantJson = JSON.parse(cleanText);
-      console.log(applicantJson);
       const applicant = new Applicant(applicantJson);
       await applicant.save();
       res.status(200).json({ message: "Resume saved successfully" });
