@@ -8,7 +8,6 @@ export const verifyToken = async (
   next: NextFunction
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-  console.log(token);
 
   if (!token) {
     res.status(401).send({ error: "Token missing" });

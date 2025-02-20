@@ -10,15 +10,15 @@ interface Education {
 interface Experience {
   job_title: string;
   company: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
 }
 
 interface Applicant extends mongoose.Document {
   name: string;
-  email: string;
-  education: Education;
-  experience: Experience;
+  email: string[];
+  education: Education[];
+  experience: Experience[];
   skills: string[];
   summary: string;
 }
@@ -28,42 +28,47 @@ const applicantsSchema = new mongoose.Schema(
     name: {
       type: String,
     },
-    email: {
-      type: String,
-      unique: true,
-      lowercase: true,
-    },
-    education: {
-      degree: {
+    email: [
+      {
         type: String,
+
+        lowercase: true,
       },
-      branch: {
-        type: String,
+    ],
+    education: [
+      {
+        degree: {
+          type: String,
+        },
+        branch: {
+          type: String,
+        },
+        institution: {
+          type: String,
+        },
+        year: {
+          type: Number,
+          min: 1900,
+          max: new Date().getFullYear(),
+        },
       },
-      institution: {
-        type: String,
+    ],
+    experience: [
+      {
+        job_title: {
+          type: String,
+        },
+        company: {
+          type: String,
+        },
+        start_date: {
+          type: String,
+        },
+        end_date: {
+          type: String,
+        },
       },
-      year: {
-        type: Number,
-        required: true,
-        min: 1900,
-        max: new Date().getFullYear(),
-      },
-    },
-    experience: {
-      job_title: {
-        type: String,
-      },
-      company: {
-        type: String,
-      },
-      start_date: {
-        type: Date,
-      },
-      end_date: {
-        type: Date,
-      },
-    },
+    ],
     skills: [
       {
         type: String,
@@ -78,7 +83,7 @@ const applicantsSchema = new mongoose.Schema(
   }
 );
 
-export const Applicants: mongoose.Model<Applicant> = mongoose.model<Applicant>(
-  "Applicants",
+export const Applicant: mongoose.Model<Applicant> = mongoose.model<Applicant>(
+  "applicant",
   applicantsSchema
 );

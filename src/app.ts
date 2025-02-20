@@ -3,6 +3,7 @@ import cors from "cors";
 import routes from "./routes/userRoutes.js";
 import bodyParser from "body-parser";
 import { CORS_ORIGIN } from "./constants.js";
+import { processAndStoreApplicantData } from "./controllers/applicantController.js";
 
 const app = express();
 app.use(bodyParser.json());
